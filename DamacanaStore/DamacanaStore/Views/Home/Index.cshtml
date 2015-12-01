@@ -4,7 +4,10 @@
 
 <br />
 
-<a class="btn btn-success" href="@Url.Action("NewProduct")">Create New Product</a>
+<a class="btn btn-toolbar" href="@Url.Action("NewProduct")">Create New Product</a> |
+<a class="btn btn-toolbar" href="@Url.Action("Index", "Cart")">View your Cart</a>
+
+<hr />
 
 <br />
 <h2>List of Products:</h2>
@@ -23,7 +26,7 @@
             <h4 class="media-heading">@p.name</h4>
                 @p.price TL
         </div>
-        <a class="btn btn-success" href="@Url.Action("AddToCart","Cart", new { id = p.id})">Add to Cart</a>
+        <a class="btn btn-success" href="@Url.Action("AddToCart","Cart", new { id = p.id})">Add 1 to Cart</a>
     </div>
 
 }

@@ -21,6 +21,7 @@ namespace DamacanaStore.Controllers
         // GET: Cart
         public ActionResult Index()
         {
+            this.CalculateTotalAmount();
             return View(cart);
         }
 
@@ -30,13 +31,65 @@ namespace DamacanaStore.Controllers
             foreach(Product p in HomeController.products)
                 if (p.id == id)
                 {
+                    //first search the cart if there is another one of the same product
+                    foreach(KeyValuePair<Product, int> itemInCart in cart.items)
+                    {
+                        if (itemInCart.Key.id == id) // found a match!!
+                        {
+                            cart.items.Remove(itemInCart); //remove existing item from list
+                            KeyValuePair<Product, int> newItem = //create a new item with increased amount
+                                new KeyValuePair<Product, int>(itemInCart.Key, itemInCart.Value + 1);
+                            cart.items.Add(newItem); //re-add the item
+                            this.CalculateTotalAmount();
+                            return View("Index", cart);
+                        }
+                    }
+
+                    //if no match is found, add it
                     KeyValuePair<Product, int> item = new KeyValuePair<Product, int>(p, 1);
                     cart.items.Add(item);
-                    cart.totalAmount += p.price;
+                    this.CalculateTotalAmount();          
                     return View("Index", cart);
                 }
 
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+
+        public ActionResult RemoveItem(int id)
+        {
+            foreach (KeyValuePair<Product, int> itemInCart in cart.items)
+            {
+                if (itemInCart.Key.id == id) // found a match!!
+                {
+                    cart.items.Remove(itemInCart); //remove existing item from list   
+                    this.CalculateTotalAmount();                                     
+                    return View("Index", cart);
+                }
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+
+        public ActionResult Clear(int id)
+        {
+            if (cart.id != id)
+            {
+                // this should never occur
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            cart.items.Clear();
+            this.CalculateTotalAmount();
+            return View("Index", cart);
+        }
+
+        protected void CalculateTotalAmount()
+        {
+            cart.totalAmount = (decimal)0.0; //reset
+            foreach (KeyValuePair<Product, int> itemInCart in cart.items)
+            {
+                cart.totalAmount += itemInCart.Key.price * itemInCart.Value; 
+            }
         }
     }
 }

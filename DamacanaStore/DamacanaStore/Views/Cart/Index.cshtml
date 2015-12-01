@@ -3,7 +3,7 @@
 
 
 <br />
-<h2>List of Products:</h2>
+<h2>Items on your cart:</h2>
 <hr />
 
 @foreach (KeyValuePair<Product, int> pair in Model.items)
@@ -20,5 +20,8 @@
     </div>
 
 }
-
+<hr/>
+<div class="success">Total amount: @Model.totalAmount</div>
 <a class="btn btn-danger" href="@Url.Action("Clear","Cart", new { id = Model.id})">Clear all items</a>
+<hr/>
+<a class="btn btn-default" href="@Url.Action("Purchase","Cart", new { id = Model.id})">Purchase</a>
