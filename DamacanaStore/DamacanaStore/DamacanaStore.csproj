@@ -127,7 +127,7 @@
     </Compile>
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\Purhcase.cs" />
+    <Compile Include="Models\Purchase.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -171,6 +171,8 @@
     <Content Include="Views\Home\ProductDetails.cshtml" />
     <Content Include="Views\Home\EditProduct.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Cart\PurchaseCompleted.cshtml" />
+    <Content Include="Views\Cart\PurchaseList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -18,6 +18,9 @@ namespace DamacanaStore.Controllers
             items = new List<KeyValuePair<Product, int>>()
         };
 
+        public static List<Purchase> purchases = new List<Purchase>();
+
+
         // GET: Cart
         public ActionResult Index()
         {
@@ -81,6 +84,33 @@ namespace DamacanaStore.Controllers
             cart.items.Clear();
             this.CalculateTotalAmount();
             return View("Index", cart);
+        }
+
+        public ActionResult Purchase(int id)
+        {
+            if (cart.id != id)
+            {
+                // this should never occur
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            //create the purchase object
+            Purchase purchase = new Purchase();
+            purchase.createdOn = DateTime.Now;
+            purchase.items = cart.items;
+            purchase.totalPrice = cart.totalAmount;
+            purchase.userId = cart.userId;
+            //purchase.id = TODO;  FIXME
+
+            //add it to the purchases list
+            purchases.Add(purchase);
+
+            //clear the cart object
+            cart.items.Clear();
+            this.CalculateTotalAmount();
+
+            return View("PurchaseCompleted", purchase);        
+
         }
 
         protected void CalculateTotalAmount()

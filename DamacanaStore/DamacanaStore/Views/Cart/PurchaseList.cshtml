@@ -1,0 +1,35 @@
+﻿@model IEnumerable<DamacanaStore.Models.Purchase>
+
+@{
+    ViewBag.Title = "PurchaseList";
+}
+
+<h2>PurchaseList</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Total amount:
+        </th>
+        <th>
+            Created on:
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.totalPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.createdOn)
+        </td>
+        <td>            
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
