@@ -9,6 +9,7 @@ namespace DamacanaStore.Models
     {
         public int id { get; set; }
         public int userId { get; set; }
-        public KeyValuePair<Product, int> items { get; set; }
+        public List<KeyValuePair<Product, int> > items { get; set; }
+        public decimal totalAmount;
     }
 }
