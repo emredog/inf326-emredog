@@ -114,6 +114,16 @@ namespace DamacanaStore.Controllers
 
         }
 
+        public ActionResult PurchaseList()
+        {
+            return View(purchases);
+        }
+
+        public ActionResult PurchaseDetails(Purchase purchase)
+        {
+            return View("PurchaseCompleted", purchase);
+        }
+
         protected void CalculateTotalAmount()
         {
             cart.totalAmount = (decimal)0.0; //reset

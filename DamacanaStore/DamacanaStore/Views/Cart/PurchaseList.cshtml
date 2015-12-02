@@ -4,7 +4,7 @@
     ViewBag.Title = "PurchaseList";
 }
 
-<h2>PurchaseList</h2>
+<h2>Previous Purchases</h2>
 
 <table class="table">
     <tr>
@@ -26,7 +26,7 @@
             @Html.DisplayFor(modelItem => item.createdOn)
         </td>
         <td>            
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Details", "PurchaseDetails", item)
             @Html.ActionLink("Delete", "Delete", new { id=item.id })
         </td>
     </tr>
