@@ -1,4 +1,5 @@
-﻿@model DamacanaStore.Models.Purchase
+﻿@using DamacanaStore.Models
+@model Purchase
 
 
 <h2>PurchaseCompleted</h2>
@@ -25,10 +26,15 @@
             Items bought:
         </dt>
         <dd>
-            TODO: show items and individual amounts/prices here
+            @foreach (KeyValuePair<Product, int> item in Model.items)
+            {
+                <div> @(item.Key.name) , Price: @(item.Key.price), Amount: @(item.Value)</div>
+            }
         </dd>
     </dl>
 </div>
+
+
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>

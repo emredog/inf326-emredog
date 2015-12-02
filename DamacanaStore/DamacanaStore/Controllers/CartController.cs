@@ -97,7 +97,8 @@ namespace DamacanaStore.Controllers
             //create the purchase object
             Purchase purchase = new Purchase();
             purchase.createdOn = DateTime.Now;
-            purchase.items = cart.items;
+            //purchase.items = new List<KeyValuePair<Product, int>>();
+            purchase.items = cart.items.ToList(); // creates a elementwise copy of the list
             purchase.totalPrice = cart.totalAmount;
             purchase.userId = cart.userId;
             //purchase.id = TODO;  FIXME
