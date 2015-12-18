@@ -5,11 +5,12 @@ using System.Web;
 
 namespace DamacanaWebAPI.Models
 {
-    public class Product
+    public class User
     {
         public Guid Id { get; set; }
         public String Name { get; set; }
-        public Decimal Price { get; set; }
+        public String Surname { get; set; }
+        public String Address { get; set; }
         // TODO
     }
 }
