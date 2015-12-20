@@ -35,5 +35,19 @@ namespace DamacanaWebAPI.Controllers
 
             return Ok(product);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private bool ProductExists(Guid id)
+        {
+            return db.Products.Count(e => e.Id == id) > 0;
+        }
     }
 }
