@@ -9,16 +9,18 @@ namespace DamacanaWebAPI.Models
     public class Purchase
     {
         public Guid Id { get; set; }
-        public List<KeyValuePair<Product, int>> ProductsAndAmounts { get; set; }
         [Required]
         public Decimal TotalAmount { get; set; }
         [Required]
-        public DateTime CreatedOn;
+        public DateTime CreatedOn { get; set; }
         // TODO (last access time, etc...)
 
+        public ICollection<Purchase_Product> PurchasedProducts { get; set;  }
+
+
         //foreign key
-        public Guid UserId;
+        public Guid UserId { get; set; }
         // navigation property
-        public User User;
+        public virtual User User { get; set; }
     }
 }

@@ -185,11 +185,29 @@
     <Compile Include="Migrations\201512201339124_Initial.Designer.cs">
       <DependentUpon>201512201339124_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512210948065_edit01.cs" />
+    <Compile Include="Migrations\201512210948065_edit01.Designer.cs">
+      <DependentUpon>201512210948065_edit01.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512210957204_edit02.cs" />
+    <Compile Include="Migrations\201512210957204_edit02.Designer.cs">
+      <DependentUpon>201512210957204_edit02.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512211039351_crosstables.cs" />
+    <Compile Include="Migrations\201512211039351_crosstables.Designer.cs">
+      <DependentUpon>201512211039351_crosstables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512211041195_edit03.cs" />
+    <Compile Include="Migrations\201512211041195_edit03.Designer.cs">
+      <DependentUpon>201512211041195_edit03.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\Cart_Product.cs" />
     <Compile Include="Models\DamacanaWebAPIContext.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Purchase.cs" />
+    <Compile Include="Models\Purchase_Product.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -246,6 +264,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201512201339124_Initial.resx">
       <DependentUpon>201512201339124_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512210948065_edit01.resx">
+      <DependentUpon>201512210948065_edit01.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512210957204_edit02.resx">
+      <DependentUpon>201512210957204_edit02.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512211039351_crosstables.resx">
+      <DependentUpon>201512211039351_crosstables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512211041195_edit03.resx">
+      <DependentUpon>201512211041195_edit03.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
