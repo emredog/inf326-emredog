@@ -71,10 +71,12 @@ namespace DamacanaWebAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        // ------ CREATE A NEW CART HERE ------------
         // POST: api/Carts
         [ResponseType(typeof(Cart))]
         public async Task<IHttpActionResult> PostCart(Cart cart)
         {
+            cart.Id = Guid.NewGuid();
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -86,8 +88,9 @@ namespace DamacanaWebAPI.Controllers
             {
                 await db.SaveChangesAsync();
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException dbUpdateEx)
             {
+                Console.WriteLine(dbUpdateEx.Message);
                 if (CartExists(cart.Id))
                 {
                     return Conflict();

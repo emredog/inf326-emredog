@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -26,5 +27,6 @@ namespace DamacanaWebAPI.Models
         public System.Data.Entity.DbSet<DamacanaWebAPI.Models.Purchase> Purchases { get; set; }
 
         public System.Data.Entity.DbSet<DamacanaWebAPI.Models.User> Users { get; set; }
+       
     }
 }

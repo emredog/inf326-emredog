@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DamacanaWebAPI.Models
 {
@@ -10,6 +11,8 @@ namespace DamacanaWebAPI.Models
     // multiple rows make a complete Cart
     public class Purchase_Product
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
         public Guid Id { get; set; }
 
         // fields

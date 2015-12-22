@@ -197,12 +197,37 @@
     <Compile Include="Migrations\201512211039351_crosstables.Designer.cs">
       <DependentUpon>201512211039351_crosstables.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201512211041195_edit03.cs" />
-    <Compile Include="Migrations\201512211041195_edit03.Designer.cs">
-      <DependentUpon>201512211041195_edit03.cs</DependentUpon>
+    <Compile Include="Migrations\201512220819489_edit03.cs" />
+    <Compile Include="Migrations\201512220819489_edit03.Designer.cs">
+      <DependentUpon>201512220819489_edit03.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512221014361_cartDto.cs" />
+    <Compile Include="Migrations\201512221014361_cartDto.Designer.cs">
+      <DependentUpon>201512221014361_cartDto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512221207449_edit04.cs" />
+    <Compile Include="Migrations\201512221207449_edit04.Designer.cs">
+      <DependentUpon>201512221207449_edit04.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512221219373_edit05.cs" />
+    <Compile Include="Migrations\201512221219373_edit05.Designer.cs">
+      <DependentUpon>201512221219373_edit05.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512221228541_edit.cs" />
+    <Compile Include="Migrations\201512221228541_edit.Designer.cs">
+      <DependentUpon>201512221228541_edit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512221237535_edit1.cs" />
+    <Compile Include="Migrations\201512221237535_edit1.Designer.cs">
+      <DependentUpon>201512221237535_edit1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512221250481_edit2.cs" />
+    <Compile Include="Migrations\201512221250481_edit2.Designer.cs">
+      <DependentUpon>201512221250481_edit2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\CartDTO.cs" />
     <Compile Include="Models\Cart_Product.cs" />
     <Compile Include="Models\DamacanaWebAPIContext.cs" />
     <Compile Include="Models\Product.cs" />
@@ -274,8 +299,26 @@
     <EmbeddedResource Include="Migrations\201512211039351_crosstables.resx">
       <DependentUpon>201512211039351_crosstables.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512211041195_edit03.resx">
-      <DependentUpon>201512211041195_edit03.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201512220819489_edit03.resx">
+      <DependentUpon>201512220819489_edit03.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512221014361_cartDto.resx">
+      <DependentUpon>201512221014361_cartDto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512221207449_edit04.resx">
+      <DependentUpon>201512221207449_edit04.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512221219373_edit05.resx">
+      <DependentUpon>201512221219373_edit05.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512221228541_edit.resx">
+      <DependentUpon>201512221228541_edit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512221237535_edit1.resx">
+      <DependentUpon>201512221237535_edit1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512221250481_edit2.resx">
+      <DependentUpon>201512221250481_edit2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
