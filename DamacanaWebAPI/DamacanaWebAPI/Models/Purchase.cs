@@ -18,7 +18,9 @@ namespace DamacanaWebAPI.Models
         public DateTime CreatedOn { get; set; }
         // TODO (last access time, etc...)
 
-        public ICollection<Purchase_Product> PurchasedProducts { get; set;  }
+
+        // navigation property
+        public virtual ICollection<Purchase_Product> PurchasedProducts { get; set;  }
 
 
         //foreign key

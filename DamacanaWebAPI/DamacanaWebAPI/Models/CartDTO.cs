@@ -7,9 +7,10 @@ namespace DamacanaWebAPI.Models
 {
     public class CartDTO
     {
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
+        // TODO add more properties as necessary
+        public String UserName { get; set; }
 
-        //foreign key
-        public Guid UserId { get; set; }        
+        public Decimal TotalAmount { get; set; }
     }
 }

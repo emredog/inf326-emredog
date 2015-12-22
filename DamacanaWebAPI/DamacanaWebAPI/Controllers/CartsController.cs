@@ -18,13 +18,21 @@ namespace DamacanaWebAPI.Controllers
         private DamacanaWebAPIContext db = new DamacanaWebAPIContext();
 
         // GET: api/Carts
-        public IQueryable<Cart> GetCarts()
+        public IQueryable<CartDTO> GetCarts()
         {
-            return db.Carts;
+            var carts = from c in db.Carts
+                        select new CartDTO()
+                        {
+                            Id = c.Id,
+                            UserName = c.User.Name + " " + c.User.Surname,
+                            TotalAmount = c.TotalAmount                            
+                        };
+
+            return carts;
         }
 
         // GET: api/Carts/5
-        [ResponseType(typeof(Cart))]
+        [ResponseType(typeof(CartDetailsDTO_Retrieve))]
         public async Task<IHttpActionResult> GetCart(Guid id)
         {
             Cart cart = await db.Carts.FindAsync(id);
@@ -33,26 +41,61 @@ namespace DamacanaWebAPI.Controllers
                 return NotFound();
             }
 
-            return Ok(cart);
+            CartDetailsDTO_Retrieve cartDetails = new CartDetailsDTO_Retrieve();
+            cartDetails.Id = cart.Id;            
+            cartDetails.TotalAmount = cart.TotalAmount;
+            cartDetails.UserName = cart.User.Name + " " + cart.User.Surname;
+            cartDetails.ProductsInCart = new List<KeyValuePair<Product, int>>();
+            // prepare products in the cart
+            foreach (Cart_Product cp in cart.ProductsInTheCart)
+            {
+                KeyValuePair<Product, int> kvp = new KeyValuePair<Product, int>(cp.Product, cp.Amount);
+                cartDetails.ProductsInCart.Add(kvp);
+            }
+
+            return Ok(cartDetails);
         }
 
+
+        // ADD PRODUCTS TO A EXISTING CART HERE ------s
         // PUT: api/Carts/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutCart(Guid id, Cart cart)
+        public async Task<IHttpActionResult> PutCart(Guid id, CartDetailsDTO cartDto)
         {
+
+            Cart cartToBeModfied = db.Carts.Single(a => a.Id == id);
+
+            cartToBeModfied.LastModified = DateTime.Now;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != cart.Id)
+            if (id != cartDto.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(cart).State = EntityState.Modified;
+            //copy CartDTO to Cart object
+            cartToBeModfied.ProductsInTheCart = cartDto.ProductsInTheCart;
 
-            try
+            // drop all products in the cart_products related to this cart
+            db.CartProducts.RemoveRange(db.CartProducts.Where(x => x.CartId == cartToBeModfied.Id));
+
+            // Cart_Products already has the ProductId and the CartId, just generate their own id's
+            foreach (Cart_Product cp in cartToBeModfied.ProductsInTheCart)
+                cp.Id = Guid.NewGuid();
+
+            //and insert them into the dbcontext object
+            db.CartProducts.AddRange(cartToBeModfied.ProductsInTheCart);
+
+            // calculate total amount
+            cartToBeModfied.TotalAmount = this.CalculateTotalAmount(cartToBeModfied);
+            
+            db.Entry(cartToBeModfied).State = EntityState.Modified;
+
+            try // and save changes to the actual db
             {
                 await db.SaveChangesAsync();
             }
@@ -78,6 +121,8 @@ namespace DamacanaWebAPI.Controllers
         {
             if (cart.Id == Guid.Empty) // if no guid is provided
                 cart.Id = Guid.NewGuid(); // generates an ID for the newly created Cart object
+
+            cart.CreatedOn = DateTime.Now;
 
             if (!ModelState.IsValid)
             {
@@ -106,7 +151,20 @@ namespace DamacanaWebAPI.Controllers
             return CreatedAtRoute("DefaultApi", new { id = cart.Id }, cart);
         }
 
-       
+
+        protected Decimal CalculateTotalAmount(Cart cart)
+        {
+            Decimal totalAmount = (Decimal)0.0;
+
+            foreach (Cart_Product cp in cart.ProductsInTheCart)
+            {
+                Product p = db.Products.Single(a => a.Id == cp.ProductId);
+                totalAmount += p.Price * cp.Amount;
+            }
+
+            return totalAmount;
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

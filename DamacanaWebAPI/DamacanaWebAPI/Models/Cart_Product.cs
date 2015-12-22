@@ -20,12 +20,10 @@ namespace DamacanaWebAPI.Models
 
 
         // foreign keys
-        //[Required]
-        //public Guid UserId { get; set; }
-        //public virtual User User { get; set; }
         [Required]
-        Guid ProductId { get; set; }
+        public Guid ProductId { get; set; }
         public virtual Product Product { get; set; }
+
         [Required]
         public Guid CartId { get; set; }
         public virtual Cart Cart { get; set; }

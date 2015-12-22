@@ -27,6 +27,10 @@ namespace DamacanaWebAPI.Models
         public System.Data.Entity.DbSet<DamacanaWebAPI.Models.Purchase> Purchases { get; set; }
 
         public System.Data.Entity.DbSet<DamacanaWebAPI.Models.User> Users { get; set; }
-       
+
+        public System.Data.Entity.DbSet<DamacanaWebAPI.Models.Cart_Product> CartProducts { get; set; }
+
+        public System.Data.Entity.DbSet<DamacanaWebAPI.Models.Purchase_Product> PurchaseProducts { get; set; }
+
     }
 }

@@ -1,24 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace DamacanaWebAPI.Models
 {
-    public class Cart
+    public class CartDetailsDTO_Retrieve
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Key]
         public Guid Id { get; set; }
+        // TODO add more properties as necessary
+        public String UserName { get; set; }
+
         public Decimal TotalAmount { get; set; }
         
-        public DateTime CreatedOn { get; set; }
-        public DateTime LastModified { get; set; }
-        // TODO add more properties as necessary
+        public List<KeyValuePair<Product, int>> ProductsInCart { get; set; }
+    }
 
-        // items in the cart:
+    public class CartDetailsDTO
+    {
+        public Guid Id { get; set; }
+        // TODO add more properties as necessary
+        public String UserName { get; set; }
+
+        public Decimal TotalAmount { get; set; }
 
         //navigation property
         public virtual ICollection<Cart_Product> ProductsInTheCart { get; set; }
