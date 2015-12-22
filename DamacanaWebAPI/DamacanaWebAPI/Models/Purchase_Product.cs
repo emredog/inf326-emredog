@@ -11,7 +11,7 @@ namespace DamacanaWebAPI.Models
     // multiple rows make a complete Cart
     public class Purchase_Product
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Key]
         public Guid Id { get; set; }
 
@@ -20,16 +20,11 @@ namespace DamacanaWebAPI.Models
         public int Amount { get; set; }
         // TODO DateTime timeAdded etc...
 
-
-        // foreign keys
-        //[Required]
-        //public Guid UserId { get; set; }
-        //public virtual User User { get; set; }
         [Required]
-        Guid ProductId { get; set; }
+        public Guid ProductId { get; set; }
         public virtual Product Product { get; set; }
         [Required]
         public Guid PurchaseId { get; set; }
-        public virtual Purchase Cart { get; set; }
+        //public virtual Purchase Purchase { get; set; } ---> not used and causes self deferencing loops, so I just removed it.
     }
 }

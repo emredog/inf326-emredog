@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DamacanaWebAPI.Models;
+using System.Collections.ObjectModel;
 
 namespace DamacanaWebAPI.Controllers
 {
@@ -38,10 +39,32 @@ namespace DamacanaWebAPI.Controllers
 
         // POST: api/Purchases
         [ResponseType(typeof(Purchase))]
-        public async Task<IHttpActionResult> PostPurchase(Purchase purchase)
+        public async Task<IHttpActionResult> PostPurchase(Guid CartId)
         {
-            if (purchase.Id == Guid.Empty)
-                purchase.Id = Guid.NewGuid();
+            Cart cartToPurchase = db.Carts.Single(c => c.Id == CartId);
+            
+            // TODO handle case if Cart is not found
+
+            // copy some basic properties
+            Purchase purchase = new Purchase();            
+            purchase.Id = Guid.NewGuid();
+            purchase.CreatedOn = DateTime.Now;
+            purchase.UserId = cartToPurchase.UserId;
+            purchase.TotalAmount = cartToPurchase.TotalAmount;
+
+            // copy product list
+            purchase.PurchasedProducts = new Collection<Purchase_Product>();
+            foreach(Cart_Product cp in cartToPurchase.ProductsInTheCart)
+            {
+                // create a new Purchase_Product object based on a Cart_Product object
+                Purchase_Product pp = new Purchase_Product();
+                pp.Id = Guid.NewGuid();
+                pp.Amount = cp.Amount;
+                pp.ProductId = cp.ProductId;
+                pp.PurchaseId = purchase.Id;
+                purchase.PurchasedProducts.Add(pp);                
+            }
+
 
             if (!ModelState.IsValid)
             {
