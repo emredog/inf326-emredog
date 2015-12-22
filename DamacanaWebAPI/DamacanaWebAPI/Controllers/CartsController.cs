@@ -40,7 +40,7 @@ namespace DamacanaWebAPI.Controllers
             {
                 return NotFound();
             }
-
+            // copy Cart properties to CartDetailsDTO_Retrieve object as necessary
             CartDetailsDTO_Retrieve cartDetails = new CartDetailsDTO_Retrieve();
             cartDetails.Id = cart.Id;            
             cartDetails.TotalAmount = cart.TotalAmount;
