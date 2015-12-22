@@ -6,7 +6,7 @@ using System.Web;
 namespace DamacanaWebAPI.Models
 {
     // This class is used for GET (retrieve) endpoint
-    public class CartDetailsDTO_Retrieve
+    public class CartDetailsDTO_GET
     {
         public Guid Id { get; set; }
         // TODO add more properties as necessary
@@ -18,7 +18,7 @@ namespace DamacanaWebAPI.Models
     }
 
     // This class is used when adding a new product to the cart (PUT endpoint)
-    public class CartDetailsDTO
+    public class CartDetailsDTO_PUT
     {
         public Guid Id { get; set; }
         // TODO add more properties as necessary

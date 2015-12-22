@@ -32,7 +32,7 @@ namespace DamacanaWebAPI.Controllers
         }
 
         // GET: api/Carts/5
-        [ResponseType(typeof(CartDetailsDTO_Retrieve))]
+        [ResponseType(typeof(CartDetailsDTO_GET))]
         public async Task<IHttpActionResult> GetCart(Guid id)
         {
             Cart cart = await db.Carts.FindAsync(id);
@@ -40,8 +40,8 @@ namespace DamacanaWebAPI.Controllers
             {
                 return NotFound();
             }
-            // copy Cart properties to CartDetailsDTO_Retrieve object as necessary
-            CartDetailsDTO_Retrieve cartDetails = new CartDetailsDTO_Retrieve();
+            // copy Cart properties to CartDetailsDTO_GET object as necessary
+            CartDetailsDTO_GET cartDetails = new CartDetailsDTO_GET();
             cartDetails.Id = cart.Id;            
             cartDetails.TotalAmount = cart.TotalAmount;
             cartDetails.UserName = cart.User.Name + " " + cart.User.Surname;
@@ -60,7 +60,7 @@ namespace DamacanaWebAPI.Controllers
         // ADD PRODUCTS TO A EXISTING CART HERE ------s
         // PUT: api/Carts/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutCart(Guid id, CartDetailsDTO cartDto)
+        public async Task<IHttpActionResult> PutCart(Guid id, CartDetailsDTO_PUT cartDto)
         {
 
             Cart cartToBeModfied = db.Carts.Single(a => a.Id == id);
