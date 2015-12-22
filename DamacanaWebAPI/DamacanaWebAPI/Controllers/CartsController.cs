@@ -76,7 +76,9 @@ namespace DamacanaWebAPI.Controllers
         [ResponseType(typeof(Cart))]
         public async Task<IHttpActionResult> PostCart(Cart cart)
         {
-            cart.Id = Guid.NewGuid();
+            if (cart.Id == Guid.Empty) // if no guid is provided
+                cart.Id = Guid.NewGuid(); // generates an ID for the newly created Cart object
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

@@ -9,6 +9,8 @@ namespace DamacanaWebAPI.Models
 {
     public class Purchase
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key]
         public Guid Id { get; set; }
         [Required]
         public Decimal TotalAmount { get; set; }

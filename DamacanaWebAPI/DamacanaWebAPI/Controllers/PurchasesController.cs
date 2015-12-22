@@ -40,6 +40,9 @@ namespace DamacanaWebAPI.Controllers
         [ResponseType(typeof(Purchase))]
         public async Task<IHttpActionResult> PostPurchase(Purchase purchase)
         {
+            if (purchase.Id == Guid.Empty)
+                purchase.Id = Guid.NewGuid();
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
