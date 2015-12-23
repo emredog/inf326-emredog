@@ -122,7 +122,9 @@ namespace DamacanaWebAPI.Controllers
             if (cart.Id == Guid.Empty) // if no guid is provided
                 cart.Id = Guid.NewGuid(); // generates an ID for the newly created Cart object
 
+            // set dates to now
             cart.CreatedOn = DateTime.Now;
+            cart.LastModified = DateTime.Now;
 
             if (!ModelState.IsValid)
             {
